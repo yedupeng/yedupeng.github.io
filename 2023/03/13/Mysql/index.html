@@ -1,0 +1,542 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Mysql-basic-1 | 风声向寂</title><meta name="author" content="ydp"><meta name="copyright" content="ydp"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Mysql基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql-basic-1">
+<meta property="og:url" content="http://example.com/2023/03/13/Mysql/index.html">
+<meta property="og:site_name" content="风声向寂">
+<meta property="og:description" content="Mysql基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2023-03-13T06:25:52.346Z">
+<meta property="article:modified_time" content="2023-03-15T13:19:31.929Z">
+<meta property="article:author" content="ydp">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/3.jpg"><link rel="canonical" href="http://example.com/2023/03/13/Mysql/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Mysql-basic-1',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-15 21:19:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/3.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="风声向寂"><span class="site-name">风声向寂</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Mysql-basic-1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-13T06:25:52.346Z" title="发表于 2023-03-13 14:25:52">2023-03-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-15T13:19:31.929Z" title="更新于 2023-03-15 21:19:31">2023-03-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Mysql-basic-1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><style>
+table
+{
+    margin: auto;
+}
+</style>
+
+<p><strong>This is my study note of MySql.</strong><br>Learning vedio link : <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kr4y1i7ru?p=1">黑马程序员</a></p>
+<h1 id="Basic-Part-1"><a href="#Basic-Part-1" class="headerlink" title="Basic Part 1"></a>Basic Part 1</h1><h2 id="Basic-structure"><a href="#Basic-structure" class="headerlink" title="Basic structure"></a>Basic structure</h2><table>
+<thead>
+<tr>
+<th align="center">classify</th>
+<th align="center">name</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DDL</td>
+<td align="center">Data definition language</td>
+<td align="center">数据定义语言</td>
+</tr>
+<tr>
+<td align="center">DML</td>
+<td align="center">Data manipulation language</td>
+<td align="center">数据操作语言</td>
+</tr>
+<tr>
+<td align="center">DQL</td>
+<td align="center">Data query language</td>
+<td align="center">数据查询语言</td>
+</tr>
+<tr>
+<td align="center">DCL</td>
+<td align="center">Data contral language</td>
+<td align="center">数据控制语言</td>
+</tr>
+</tbody></table>
+<h2 id="Data-type"><a href="#Data-type" class="headerlink" title="Data type"></a>Data type</h2><ul>
+<li>整型<br><img src="/../images/mysql-data.png" alt="Alt text"><style>
+  img[alt="Alt text"]{
+      width:500px;
+  }
+
+  img[alt="Alt text1"]{
+      width:600px;
+  }</li>
+</ul>
+<p></style></p>
+<ul>
+<li>字符型<br><img src="/../images/mysql-data2.png" alt="Alt text1"></li>
+</ul>
+<h2 id="DDL-Data-Definition-Language"><a href="#DDL-Data-Definition-Language" class="headerlink" title="DDL(Data Definition Language)"></a>DDL(Data Definition Language)</h2><table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SHOW DATABASEs</td>
+<td align="center">展示当前所有数据库</td>
+</tr>
+<tr>
+<td align="center">SELECT DATABASE()</td>
+<td align="center">展示当前所处数据库</td>
+</tr>
+<tr>
+<td align="center">CREATE DATABASE 数据库名</td>
+<td align="center">创建数据库</td>
+</tr>
+<tr>
+<td align="center">USE 数据库名</td>
+<td align="center">使用数据库</td>
+</tr>
+<tr>
+<td align="center">DROP DATABASE 数据库名</td>
+<td align="center">删除数据库</td>
+</tr>
+</tbody></table>
+<h3 id="For-example"><a href="#For-example" class="headerlink" title="For example"></a>For example</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、<span class="keyword">CREATE</span> DATABASE tb_database;  <span class="operator">/</span><span class="operator">/</span> 创建tb_database数据库</span><br><span class="line"><span class="number">2</span>、USE tb_database;              <span class="operator">/</span><span class="operator">/</span> 使用tb_database数据库</span><br><span class="line"><span class="number">3</span>、<span class="keyword">DROP</span> DATABASE tb_databse;     <span class="operator">/</span><span class="operator">/</span> 删除tb_database数据库</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SHOW TABLES</td>
+<td align="center">展示当前所有表</td>
+</tr>
+<tr>
+<td align="center">CREATE TABLE 表名</td>
+<td align="center">创建表</td>
+</tr>
+<tr>
+<td align="center">DESC 表名</td>
+<td align="center">查看表的具体信息</td>
+</tr>
+<tr>
+<td align="center">SHOW CREATE TABLE 表名</td>
+<td align="center">显示创建表时的语句</td>
+</tr>
+<tr>
+<td align="center">ALTER TABLE 表名 ADD&#x2F;MODIFY&#x2F;CHANGE&#x2F;DROP&#x2F;RENAME TO…</td>
+<td align="center">对表的操作</td>
+</tr>
+<tr>
+<td align="center">DROP TABLE 表名</td>
+<td align="center">移除表</td>
+</tr>
+</tbody></table>
+<h3 id="For-example-1"><a href="#For-example-1" class="headerlink" title="For example"></a>For example</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_my;            <span class="operator">/</span><span class="operator">/</span> 创建tb_my表</span><br><span class="line"><span class="keyword">DESC</span> <span class="keyword">TABLE</span> tb_my;              <span class="operator">/</span><span class="operator">/</span> 查看tb_my表具体信息</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_my;       <span class="operator">/</span><span class="operator">/</span> 展示创建tb_my时的语句</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_my <span class="keyword">ADD</span> id <span class="type">int</span>;  <span class="operator">/</span><span class="operator">/</span> 对tb_my进行加操作</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> tb_my;              <span class="operator">/</span><span class="operator">/</span> 删除tb_my表</span><br></pre></td></tr></table></figure>
+
+<h2 id="DML-Data-Manipulation-Language"><a href="#DML-Data-Manipulation-Language" class="headerlink" title="DML(Data Manipulation Language)"></a>DML(Data Manipulation Language)</h2><table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">INSERT INTO 表名 (字段名1，字段名2…) VALUES[(值1，值2…)]</td>
+<td align="center">为表中字段加入数据</td>
+</tr>
+<tr>
+<td align="center">UPDATE 表名 SET 字段1&#x3D;值1， 字段2&#x3D;值2 WHERE 条件</td>
+<td align="center">修改表中数据</td>
+</tr>
+<tr>
+<td align="center">DROP FROM 表名 WHERE 条件</td>
+<td align="center">删除满足条件数据</td>
+</tr>
+</tbody></table>
+<h3 id="For-example-2"><a href="#For-example-2" class="headerlink" title="For example"></a>For example</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO tb (id, name) VALUES[(1, 2), (2,3)]  // 为id name插入数据</span><br><span class="line">UPDATE tb SET name = 1, id = 2 WHERE age &lt; 3    // 更新age小于3的name id数据</span><br><span class="line">DROP FROM tb WHERE age &lt; 3                      // 删除age小于3的数据</span><br></pre></td></tr></table></figure>
+<h2 id="Data-Query-Language"><a href="#Data-Query-Language" class="headerlink" title="Data Query Language"></a>Data Query Language</h2><h3 id="The-structure-of-DQL"><a href="#The-structure-of-DQL" class="headerlink" title="The structure of DQL"></a>The structure of DQL</h3><p><img src="/../images/mysql-data3.png" alt="Alt text1"></p>
+<h3 id="For-example-3"><a href="#For-example-3" class="headerlink" title="For example"></a>For example</h3><ul>
+<li>Basic</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SELECT 字段1、字段2… FROM 表名</td>
+<td align="center">查询字段1、2…的数据</td>
+</tr>
+<tr>
+<td align="center">SELECT * FROM 表名</td>
+<td align="center">查询所有字段</td>
+</tr>
+<tr>
+<td align="center">SELECT 字段1[as 别名1], 字段2[as 别名2]… FROM 表名</td>
+<td align="center">设置别名</td>
+</tr>
+<tr>
+<td align="center">SELECT DISTINCE 字段1 from 表名</td>
+<td align="center">去除表字段一内重复的数据</td>
+</tr>
+</tbody></table>
+<h3 id="For-example-4"><a href="#For-example-4" class="headerlink" title="For example"></a>For example</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id <span class="keyword">as</span> &quot;序号&quot; <span class="keyword">FROM</span> tb       <span class="operator">/</span><span class="operator">/</span> 给id取别名为序号</span><br><span class="line"><span class="keyword">SELECT</span> DISTINCE id <span class="keyword">from</span> <span class="keyword">FROM</span> tb  <span class="operator">/</span><span class="operator">/</span> 去除<span class="keyword">DISTINCT</span> id字段的重复数据</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Condition<br><img src="/../images/mysql-data4.png" alt="Alt text1"></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SELECT 字段列表 FROM 表名 WHERE 条件</td>
+<td align="center">根据条件赛选字段数据</td>
+</tr>
+</tbody></table>
+<h3 id="For-example-5"><a href="#For-example-5" class="headerlink" title="For example"></a>For example</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab <span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">15</span> <span class="keyword">and</span> <span class="number">20</span>;            <span class="operator">/</span><span class="operator">/</span> 筛选年龄在<span class="number">15</span><span class="operator">~</span><span class="number">20</span>的数据</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab <span class="keyword">WHERE</span> gender <span class="operator">=</span> &quot;女&quot; <span class="keyword">and</span> age <span class="operator">&lt;</span> <span class="number">100</span>;      <span class="operator">/</span><span class="operator">/</span> 筛选女生年龄低于<span class="number">100</span>的数据</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab <span class="keyword">WHERE</span> age <span class="operator">=</span> <span class="number">1</span> <span class="keyword">or</span> age <span class="operator">=</span> <span class="number">2</span> <span class="keyword">or</span> age <span class="operator">=</span> <span class="number">3</span>;    <span class="operator">/</span><span class="operator">/</span> 筛选年龄为<span class="number">1</span>，<span class="number">2</span>，<span class="number">3</span>的数据</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab <span class="keyword">WHERE</span> age <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);                    <span class="operator">/</span><span class="operator">/</span> 筛选年龄为<span class="number">1</span>，<span class="number">2</span>，<span class="number">3</span>的数据</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab <span class="keyword">WHERE</span> name <span class="keyword">like</span> &quot;__&quot;;                   <span class="operator">/</span><span class="operator">/</span> 筛选名字长度为<span class="number">2</span>的数据</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab <span class="keyword">WHERE</span> name <span class="keyword">like</span> &quot;%x&quot;                    <span class="operator">/</span><span class="operator">/</span> 筛选名字最后为x的数据</span><br></pre></td></tr></table></figure>
+<ul>
+<li>聚合操作<br><img src="/../images/mysql-data5.png" alt="Alt text1"></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SELECT 聚合操作 FROM 表名</td>
+<td align="center">纵向操作数据</td>
+</tr>
+</tbody></table>
+<h3 id="For-example-6"><a href="#For-example-6" class="headerlink" title="For example"></a>For example</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> tab <span class="keyword">WHEN</span> age<span class="operator">&lt;</span><span class="number">10</span>;   </span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SELECT 字段列表 FROM 表名[WHERE 条件] GROUP by 分组段名[having 条件]</td>
+<td align="center">分组查询数据</td>
+</tr>
+</tbody></table>
+<ul>
+<li>WHERE 操作在分组前执行， HAVING 在分组后执行</li>
+<li>WHERE 无法聚合， HAVING 可以聚合</li>
+</ul>
+<h3 id="For-example-7"><a href="#For-example-7" class="headerlink" title="For example"></a>For example</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab <span class="keyword">WHERE</span> name <span class="keyword">like</span> &quot;__&quot; <span class="keyword">GROUP</span> <span class="keyword">BY</span> gender <span class="keyword">having</span> age <span class="operator">&lt;</span> <span class="number">10</span>;  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 将名字为两个数字同时年纪小于<span class="number">10</span>岁的数据根据性别划分</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SELECT 字段列表 FROM 表名 ORDER by 字段1，排序方式1，字段2…</td>
+<td align="center">根据排序方式排序数据</td>
+</tr>
+</tbody></table>
+<ul>
+<li>ase 升序</li>
+<li>dase降序</li>
+</ul>
+<h3 id="For-example-8"><a href="#For-example-8" class="headerlink" title="For example"></a>For example</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab <span class="keyword">ORDER</span> <span class="keyword">BY</span> age ase;        <span class="operator">/</span><span class="operator">/</span> 根据年龄升序排序数据</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SELECT 字段列表 FROM tab LIMIT  起始位置 , 数量</td>
+<td align="center">根据索引数量查找数据</td>
+</tr>
+</tbody></table>
+<ul>
+<li>起始索引从0开始， 起始索引&#x3D;（页码-1）* 查询数量</li>
+<li>分页查询有不同的表达形式，Mysql中式LIMIT</li>
+<li>查询第一页数据可以忽略起始位置，或直接写 LIMIT 10</li>
+</ul>
+<h2 id="Data-Contral-Language"><a href="#Data-Contral-Language" class="headerlink" title="Data Contral Language"></a>Data Contral Language</h2><table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">USE mysql; + SELECT * FROM user;</td>
+<td align="center">查询用户</td>
+</tr>
+<tr>
+<td align="center">CREATE USER  ‘用户名‘@’主机名’ IDENTITY BY ‘密码’;</td>
+<td align="center">创建用户</td>
+</tr>
+<tr>
+<td align="center">ALTER USER ‘用户名‘@’主机名’ IDENTITY with mysql_native_password  BY ‘新密码’;</td>
+<td align="center">修改密码</td>
+</tr>
+<tr>
+<td align="center">DROP USER ‘用户名‘@’主机名’</td>
+<td align="center">删除用户</td>
+</tr>
+</tbody></table>
+<h3 id="For-example-9"><a href="#For-example-9" class="headerlink" title="For example"></a>For example</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;u1&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> <span class="keyword">IDENTITY</span> <span class="keyword">BY</span> <span class="string">&#x27;123456&#x27;</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 创建只能访问localhost的用户u1，密码为<span class="number">123456</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;u2&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTYTY <span class="keyword">WITH</span> mysql_native_password <span class="keyword">BY</span> <span class="string">&#x27;123456;  </span></span><br><span class="line"><span class="string">// 修改可以访问全部主机的用户u2的密码&#x27;</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">USER</span> <span class="string">&#x27;u2&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 删除用户u2</span><br></pre></td></tr></table></figure>
+<h3 id="Persions"><a href="#Persions" class="headerlink" title="Persions"></a>Persions</h3><p><img src="/../images/mysql-data6.png" alt="Alt text1">   </p>
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">illustrate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SHOW GRANTS FOR ‘用户名‘@’主机名’;</td>
+<td align="center">展示所有权限</td>
+</tr>
+<tr>
+<td align="center">GRANT 权限列表 ON 数据库名.表名 TO ‘用户名‘@’主机名’;</td>
+<td align="center">授予权限</td>
+</tr>
+<tr>
+<td align="center">REVOKE 权限列表 ON 数据库名.表名 FROM ‘用户名‘@’主机名’;</td>
+<td align="center">移除权限</td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">ydp</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/13/Mysql/">http://example.com/2023/03/13/Mysql/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">风声向寂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Mysql/">Mysql</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/15/Mysql2/" title="Mysql-basic-2"><img class="cover" src="/../images/1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Mysql-basic-2</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/12/hello-world/" title="Hello World"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/03/15/Mysql2/" title="Mysql-basic-2"><img class="cover" src="/../images/1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-15</div><div class="title">Mysql-basic-2</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/3.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ydp</div><div class="author-info__description">我不喜欢卷，只喜欢默默的学</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yedupeng"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yedupeng" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/1435606133@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Basic-Part-1"><span class="toc-number">1.</span> <span class="toc-text">Basic Part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-structure"><span class="toc-number">1.1.</span> <span class="toc-text">Basic structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-type"><span class="toc-number">1.2.</span> <span class="toc-text">Data type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DDL-Data-Definition-Language"><span class="toc-number">1.3.</span> <span class="toc-text">DDL(Data Definition Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example"><span class="toc-number">1.3.1.</span> <span class="toc-text">For example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">For example</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DML-Data-Manipulation-Language"><span class="toc-number">1.4.</span> <span class="toc-text">DML(Data Manipulation Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-2"><span class="toc-number">1.4.1.</span> <span class="toc-text">For example</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Query-Language"><span class="toc-number">1.5.</span> <span class="toc-text">Data Query Language</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-structure-of-DQL"><span class="toc-number">1.5.1.</span> <span class="toc-text">The structure of DQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-3"><span class="toc-number">1.5.2.</span> <span class="toc-text">For example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-4"><span class="toc-number">1.5.3.</span> <span class="toc-text">For example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-5"><span class="toc-number">1.5.4.</span> <span class="toc-text">For example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-6"><span class="toc-number">1.5.5.</span> <span class="toc-text">For example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-7"><span class="toc-number">1.5.6.</span> <span class="toc-text">For example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-8"><span class="toc-number">1.5.7.</span> <span class="toc-text">For example</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Contral-Language"><span class="toc-number">1.6.</span> <span class="toc-text">Data Contral Language</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#For-example-9"><span class="toc-number">1.6.1.</span> <span class="toc-text">For example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Persions"><span class="toc-number">1.6.2.</span> <span class="toc-text">Persions</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/04/05/OSI%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/" title="OSI"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OSI"/></a><div class="content"><a class="title" href="/2023/04/05/OSI%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/" title="OSI">OSI</a><time datetime="2023-04-05T04:59:57.702Z" title="发表于 2023-04-05 12:59:57">2023-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/23/ffmpeg/" title="ffmpeg"><img src="/../images/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ffmpeg"/></a><div class="content"><a class="title" href="/2023/03/23/ffmpeg/" title="ffmpeg">ffmpeg</a><time datetime="2023-03-23T04:36:14.596Z" title="发表于 2023-03-23 12:36:14">2023-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/15/Mysql2/" title="Mysql-basic-2"><img src="/../images/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mysql-basic-2"/></a><div class="content"><a class="title" href="/2023/03/15/Mysql2/" title="Mysql-basic-2">Mysql-basic-2</a><time datetime="2023-03-15T13:19:10.298Z" title="发表于 2023-03-15 21:19:10">2023-03-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/13/Mysql/" title="Mysql-basic-1"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mysql-basic-1"/></a><div class="content"><a class="title" href="/2023/03/13/Mysql/" title="Mysql-basic-1">Mysql-basic-1</a><time datetime="2023-03-13T06:25:52.346Z" title="发表于 2023-03-13 14:25:52">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/12/hello-world/" title="Hello World"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2023/03/12/hello-world/" title="Hello World">Hello World</a><time datetime="2023-03-12T12:31:07.964Z" title="发表于 2023-03-12 20:31:07">2023-03-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By ydp</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://example.com/2023/03/13/Mysql/'
+    this.page.identifier = '/2023/03/13/Mysql/'
+    this.page.title = 'Mysql-basic-1'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+
+  document.getElementById('darkmode').addEventListener('click', () => {
+    setTimeout(() => window.disqusReset(), 200)
+  })
+}
+
+if ('Valine' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
