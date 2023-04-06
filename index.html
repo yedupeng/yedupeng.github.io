@@ -54,7 +54,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-04-06 19:53:31'
+  postUpdate: '2023-04-06 20:45:17'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -185,16 +185,42 @@ table
     margin: auto;
 }
 
+img[alt="Alt text"]
+{
+    width:300px;
+    align:center;
+}
 
-排序算法1、插入排序从上图中我们可以得到：
+
+排序算法1、插入排序
+从上图中我们可以得到：
 
 首先认为第一个数据已排序
 从第item数据开始，从后往前排序，直到无法再前进
 遍历到无法前进时，插入到此时的位置
 重复上述操作，直到排序完全
 
+
+
+
+情况
+时间复杂度度
+空间复杂度
+
+
+
+最差
+$O(N^2)$
+O(1)
+
+
+最优
+$O(N)$
+O(1)
+
+
 代码表示如下：
-1234567891011121314151617181920void inSert(int *data, int num)&#123;    for(int i=0; i &lt; num-1; i++)    &#123;        int end = i;        int item = data[end+1];        while(end&gt;=0)        &#123;            if(item &lt; data[end])            &# ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/04/06/C++/" title="C++拓展"><img class="post-bg" src="/../images/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++拓展"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/04/06/C++/" title="C++拓展">C++拓展</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-06T07:24:23.930Z" title="发表于 2023-04-06 15:24:23">2023-04-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/C/">C++</a></span></div><div class="content">This is my study note of C++.  
+1234567891011121314151617181920void inSert(int *data, int num)&#123;    for(int i=0; i &lt; num-1; i++)    &#123;        int end = i ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/04/06/C++/" title="C++拓展"><img class="post-bg" src="/../images/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++拓展"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/04/06/C++/" title="C++拓展">C++拓展</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-06T07:24:23.930Z" title="发表于 2023-04-06 15:24:23">2023-04-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/C/">C++</a></span></div><div class="content">This is my study note of C++.  
 
 table
 {
@@ -355,7 +381,7 @@ More info: Deployment
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OSI/"><span class="card-category-list-name">OSI</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/algorithm/"><span class="card-category-list-name">algorithm</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ffmpeg/"><span class="card-category-list-name">ffmpeg</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="card-category-list-name">数据库</span><span class="card-category-list-count">2</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/OSI/" style="font-size: 1.1em; color: #999">OSI</a> <a href="/tags/ffmpeg/" style="font-size: 1.1em; color: #999">ffmpeg</a> <a href="/tags/algorithm/" style="font-size: 1.1em; color: #999">algorithm</a> <a href="/tags/Mysql/" style="font-size: 1.5em; color: #99a9bf">Mysql</a> <a href="/tags/C/" style="font-size: 1.1em; color: #999">C++</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">7</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-04-06T11:53:31.662Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By ydp</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/algorithm/" style="font-size: 1.1em; color: #999">algorithm</a> <a href="/tags/Mysql/" style="font-size: 1.5em; color: #99a9bf">Mysql</a> <a href="/tags/ffmpeg/" style="font-size: 1.1em; color: #999">ffmpeg</a> <a href="/tags/OSI/" style="font-size: 1.1em; color: #999">OSI</a> <a href="/tags/C/" style="font-size: 1.1em; color: #999">C++</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">7</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-04-06T12:45:16.913Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By ydp</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
   init: (str) => {
     window.typed = new Typed('#subtitle', Object.assign({
       strings: str,
