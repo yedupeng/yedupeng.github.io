@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>平台总线驱动 | 风声向寂</title><meta name="author" content="ydp"><meta name="copyright" content="ydp"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="linux platform 驱动笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="平台总线驱动">
+<meta property="og:url" content="https://yedupeng.github.io/2023/10/04/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/index.html">
+<meta property="og:site_name" content="风声向寂">
+<meta property="og:description" content="linux platform 驱动笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yedupeng.github.io/images/1.png">
+<meta property="article:published_time" content="2023-10-04T11:29:10.749Z">
+<meta property="article:modified_time" content="2023-10-05T06:47:48.415Z">
+<meta property="article:author" content="ydp">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yedupeng.github.io/images/1.png"><link rel="shortcut icon" href="/img/3.jpg"><link rel="canonical" href="https://yedupeng.github.io/2023/10/04/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '平台总线驱动',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-05 14:47:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/3.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../images/1.png')"><nav id="nav"><span id="blog-info"><a href="/" title="风声向寂"><span class="site-name">风声向寂</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">平台总线驱动</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-04T11:29:10.749Z" title="发表于 2023-10-04 19:29:10">2023-10-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-05T06:47:48.415Z" title="更新于 2023-10-05 14:47:48">2023-10-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/linux/">linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="平台总线驱动"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>This is my study note of platform.</strong>  </p>
+<style>
+table
+{
+    margin: auto;
+}
+</style>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="什么是总线模型"><a href="#什么是总线模型" class="headerlink" title="什么是总线模型"></a>什么是总线模型</h3><p>也叫platform总线模型，是linux内核虚拟出来的总线，并不是真实的总线。平台总线模型就是将我们原来的驱动文件分为device文件和driver文件。<br>设备、总线、驱动，主要是总线通过设备和驱动中相同的名字来进行匹配，实际上就是字符串比较。</p>
+<h3 id="platform设备注册"><a href="#platform设备注册" class="headerlink" title="platform设备注册"></a>platform设备注册</h3><p>主要写的是硬件资源，指的是寄存器的地址和中断号等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">struct platform_device</span><br><span class="line">&#123;</span><br><span class="line">    const char *name;         // 设备名字用于后续匹配，可以在sys/bus目录下看到注册的设备</span><br><span class="line">    int id;                   // 我们的设备一般只有一个，填-1就行</span><br><span class="line">    struct device dev;        // 内嵌的device结构体,一般用于实现release</span><br><span class="line">    u32 num_resource;         // 资源数量</span><br><span class="line">    struct resource *resource;// device的里面的硬件资源</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct resource</span><br><span class="line">&#123;</span><br><span class="line">    resource_size_t start;                       // 资源的起始</span><br><span class="line">    resource_size_t end;                         // 资源的末尾</span><br><span class="line">    const char *name;                            // 资源的名字</span><br><span class="line">    unsigned long flags;                         // 资源的类型</span><br><span class="line">    struct resource *parent, *sibling, *child;   // 资源的父节点、兄弟结点、子结点</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">platform_device_register(&amp;platform_device);      // 用于设备注册</span><br><span class="line">platform_device_unregister(&amp;platform_device);    // 用于设备取消注册</span><br></pre></td></tr></table></figure>
+
+<h3 id="platform驱动注册"><a href="#platform驱动注册" class="headerlink" title="platform驱动注册"></a>platform驱动注册</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">struct platform_driver</span><br><span class="line">&#123;</span><br><span class="line">    int (*probe)(struct platform_device*);</span><br><span class="line">    // 匹配成功probe</span><br><span class="line">    int (*remove)(struct platform_device*);</span><br><span class="line">    // device或driver任意一个remove则remove</span><br><span class="line">    int (*shutdown)(struct platform_device*);</span><br><span class="line">    // 收到shutdown命令则shutdown</span><br><span class="line">    int (*suspend)(struct platform_device*, pm_message_t state</span><br><span class="line">);</span><br><span class="line">    // 收到休眠则休眠</span><br><span class="line">    int (*resume)(struct platform_device*);</span><br><span class="line">    // 收到唤醒则唤醒</span><br><span class="line">    struct device_driver driver;</span><br><span class="line">    const struct platform_device_id *id_table;</span><br><span class="line">    bool prevent_deferred_probe;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="资源获得"><a href="#资源获得" class="headerlink" title="资源获得"></a>资源获得</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.直接访问（不安全）</span><br><span class="line">    pdev-&gt;resource[x].m                          // 访问resource[x]的m资源</span><br><span class="line">2.platform_get_resource(dev, index);             // 获取同类资源列表中的第index个资源</span><br><span class="line">  request_mem_region(start, n, name);            // 注册内存，start为寄存器起始值，n为长度，name为名字</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://yedupeng.github.io">ydp</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://yedupeng.github.io/2023/10/04/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/">https://yedupeng.github.io/2023/10/04/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://yedupeng.github.io" target="_blank">风声向寂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a></div><div class="post_share"><div class="social-share" data-image="/../images/1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/05/linux%E5%BA%93_%E7%AE%A1%E9%81%93_%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/" title="库、管道、共享内存"><img class="cover" src="/../images/1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">库、管道、共享内存</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/03/%E8%AE%BE%E5%A4%87%E6%A0%91%E7%AC%94%E8%AE%B0/" title="device tree"><img class="cover" src="/../images/1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">device tree</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/06/07/LINUX%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F/" title="linux驱动"><img class="cover" src="/../images/1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-07</div><div class="title">linux驱动</div></div></a></div><div><a href="/2023/08/24/shell/" title="shell"><img class="cover" src="/../images/1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-24</div><div class="title">shell</div></div></a></div><div><a href="/2023/10/03/%E8%AE%BE%E5%A4%87%E6%A0%91%E7%AC%94%E8%AE%B0/" title="device tree"><img class="cover" src="/../images/1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-03</div><div class="title">device tree</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/3.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ydp</div><div class="author-info__description">我不喜欢卷，只喜欢默默的学</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yedupeng"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yedupeng" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/1435606133@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%80%BB%E7%BA%BF%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">什么是总线模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#platform%E8%AE%BE%E5%A4%87%E6%B3%A8%E5%86%8C"><span class="toc-number">1.2.</span> <span class="toc-text">platform设备注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#platform%E9%A9%B1%E5%8A%A8%E6%B3%A8%E5%86%8C"><span class="toc-number">1.3.</span> <span class="toc-text">platform驱动注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E8%8E%B7%E5%BE%97"><span class="toc-number">1.4.</span> <span class="toc-text">资源获得</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/05/linux%E5%BA%93_%E7%AE%A1%E9%81%93_%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/" title="库、管道、共享内存"><img src="/../images/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="库、管道、共享内存"/></a><div class="content"><a class="title" href="/2023/10/05/linux%E5%BA%93_%E7%AE%A1%E9%81%93_%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/" title="库、管道、共享内存">库、管道、共享内存</a><time datetime="2023-10-05T07:05:59.566Z" title="发表于 2023-10-05 15:05:59">2023-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/04/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/" title="平台总线驱动"><img src="/../images/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="平台总线驱动"/></a><div class="content"><a class="title" href="/2023/10/04/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/" title="平台总线驱动">平台总线驱动</a><time datetime="2023-10-04T11:29:10.749Z" title="发表于 2023-10-04 19:29:10">2023-10-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/03/%E8%AE%BE%E5%A4%87%E6%A0%91%E7%AC%94%E8%AE%B0/" title="device tree"><img src="/../images/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="device tree"/></a><div class="content"><a class="title" href="/2023/10/03/%E8%AE%BE%E5%A4%87%E6%A0%91%E7%AC%94%E8%AE%B0/" title="device tree">device tree</a><time datetime="2023-10-03T11:38:30.902Z" title="发表于 2023-10-03 19:38:30">2023-10-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/19/rust/" title="rust基础"><img src="/../images/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="rust基础"/></a><div class="content"><a class="title" href="/2023/09/19/rust/" title="rust基础">rust基础</a><time datetime="2023-09-19T13:43:20.289Z" title="发表于 2023-09-19 21:43:20">2023-09-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/11/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%AE%BE%E8%AE%A1%E8%A7%84%E5%88%99/" title="面向对象设计规则"><img src="/../images/12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面向对象设计规则"/></a><div class="content"><a class="title" href="/2023/09/11/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%AE%BE%E8%AE%A1%E8%A7%84%E5%88%99/" title="面向对象设计规则">面向对象设计规则</a><time datetime="2023-09-11T08:16:26.748Z" title="发表于 2023-09-11 16:16:26">2023-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By ydp</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'https://yedupeng.github.io/2023/10/04/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/'
+    this.page.identifier = '/2023/10/04/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/'
+    this.page.title = '平台总线驱动'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+
+  document.getElementById('darkmode').addEventListener('click', () => {
+    setTimeout(() => window.disqusReset(), 200)
+  })
+}
+
+if ('Valine' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
